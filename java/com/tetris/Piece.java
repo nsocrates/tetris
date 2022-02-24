@@ -126,41 +126,6 @@ public class Piece {
         return new Piece(rotatedBody, pivot, color, name);
     }
 
-    // private Piece computeNextRotation() {
-    //     Point[] rotatedBody = new Point[body.length];
-    //     double cx = pivot[0];
-    //     double cy = pivot[1];
-    //     int dir = 1;
-
-    //     for (int i = 0; i < body.length; i++) {
-    //         Point point = body[i];
-    //         int px = point.getX();
-    //         int py = point.getY();
-    //         int rx = (int)(cx + dir * cy - dir * py);
-    //         int ry = (int)(cy - dir * cx + dir * px);
-    //         rotatedBody[i] = new Point(rx, ry);
-    //     }
-
-    //     return new Piece(rotatedBody, pivot, color, name);
-    // }
-
-    // private Piece computeNextRotation(int dir) {
-    //     Point[] rotatedBody = new Point[body.length];
-    //     double cx = pivot[0];
-    //     double cy = pivot[1];
-
-    //     for (int i = 0; i < body.length; i++) {
-    //         Point point = body[i];
-    //         int px = point.getX();
-    //         int py = point.getY();
-    //         int rx = (int)(cx + dir * cy - dir * py);
-    //         int ry = (int)(cy - dir * cx + dir * px);
-    //         rotatedBody[i] = new Point(rx, ry);
-    //     }
-
-    //     return new Piece(rotatedBody, pivot, color, name);
-    // }
-
     public String toString() {
         int drawSize = Math.max(width, height);
         String s = "";

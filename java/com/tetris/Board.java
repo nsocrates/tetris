@@ -122,29 +122,35 @@ public class Board {
                 String cell = grid.getCell(x, y);
                 grid.setCell(x, y - 1, cell);
             }
+
+            widths[y - 1] = widths[y];
+        }
+    }
+
+    private void clearRow(int row) {
+        for (int x = 0; x < width; x++) {
+            heights[x] -= 1;
+            grid.setCell(x, row, grid.emptyCell);
         }
     }
 
     public int clearRows() {
         int lineCount = 0;
-        int topRow = 0;
-        for (int y = 0; y < largestRow; y++) {
+        int y = 0;
+
+        while (y < largestRow) {
             if (widths[y] != width) {
+                y += 1;
                 continue;
             }
 
-            for (int x = 0; x < width; x++) {
-                heights[x] -= 1;
-            }
+            clearRow(y);
+            shiftRow(y);
 
-            grid.fillRow(y, grid.emptyCell);
-            widths[y] = 0;
             lineCount += 1;
-            topRow += 1;
+            largestRow -= 1;
         }
 
-        shiftRow(topRow);
-        largestRow -= lineCount;
         return lineCount;
     }
 }
