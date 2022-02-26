@@ -141,16 +141,28 @@ public class Tetris {
         }
     }
 
+    public void generateRandomPiece() {
+        Piece nextPiece = getRandomPiece();
+        step();
+        spawn(nextPiece);
+    }
+
     public void hardDrop() {
         board.undo();
         int pY = board.dropHeight(currentPiece, currentX);
         Message message = setCurrentPiece(currentPiece, currentX, pY);
 
         if (message == Message.PLACE_OK) {
-            // Piece nextPiece = getRandomPiece();
-            Piece nextPiece = Piece.get("I");
-            step();
-            spawn(nextPiece);
+            generateRandomPiece();
+        }
+    }
+
+    public void tick() {
+        board.undo();
+        Message message = move(0, -1);
+
+        if (message.ordinal() >= Message.PLACE_OUT_BOUNDS.ordinal()) {
+            generateRandomPiece();
         }
     }
 }

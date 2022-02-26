@@ -13,15 +13,16 @@ public class Game {
         commands.put("p", () -> printBoard());
         commands.put("q", () -> quit());
         commands.put("t", () -> printCurrentPiece());
-        commands.put("(", () -> rotateLeft());
-        commands.put(")", () -> rotateRight());
-        commands.put("v", () -> moveDown());
-        commands.put("<", () -> moveLeft());
-        commands.put(">", () -> moveRight());
-        commands.put("vvvv", () -> hardDrop());
-        commands.put("<<<<", () -> hardLeft());
-        commands.put(">>>>", () -> hardRight());
+        commands.put("z", () -> rotateLeft());
+        commands.put("x", () -> rotateRight());
+        commands.put("k", () -> moveLeft());
+        commands.put(";", () -> moveRight());
+        commands.put("l", () -> moveDown());
+        commands.put("c", () -> hardDrop());
+        commands.put("kkkk", () -> hardLeft());
+        commands.put(";;;;", () -> hardRight());
         commands.put("de", () -> debug());
+        commands.put("n", () -> tick());
     }
 
     public void run() {
@@ -34,8 +35,14 @@ public class Game {
             if (commands.containsKey(input)) {
                 commands.get(input).run();
             } else {
-                spawn(input);
+                try {
+                    spawn(input);
+                } catch (Exception e) {
+                    System.out.println("Not a command!");
+                }
             }
+
+            update();
         }
     }
 
@@ -94,4 +101,13 @@ public class Game {
     }
 
     public void hold() {}
+
+    public void tick() {
+        tetris.tick();
+    }
+
+    public void update() {
+        tick();
+        printBoard();
+    }
 }
